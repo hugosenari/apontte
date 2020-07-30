@@ -1,0 +1,9 @@
+service: apontte
+
+provider: serverless/provider.yml
+
+fuctions: serverless/functions.yml
+
+resources: serverless/resources.yml
+
+plugins: serverless/plugins.yml

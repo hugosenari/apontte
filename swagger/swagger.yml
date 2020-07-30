@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: Apontte
+  description: API para contratação de serviço de crédito com a Pontte
+  termsOfService: https://pontte.com.br/
+  contact:
+    email: hugosenari@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Informações adicionais no nosso site
+  url: https://pontte.com.br/
+servers:
+  - url: https://petstore.swagger.io/v2
+tags:
+  - name: contract
+    description: Fluxo de contratação de crédito
+  - name: images
+    description: Upload de imagens
+    externalDocs:
+      description: AWS Presigned URL
+      url: https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html
+paths:
+  /:
+    post:
+      tags:
+        - contract
+      summary: Iniciação de um novo contrato de crédito
+      operationId: createContract
+      requestBody:
+        description: Dados do contrato no corpo da requisição
+        content:
+          application/json:
+            schema:
+              $ref: contract.json
+        required: true
+      responses:
+        201:
+          description: contrato criado
+          content:
+            application/json:
+              schema:
+                properties:
+                  contractId:
+                    type: string
+        405:
+          description: Invalid input
+          content: {}
+
+  /{id}:
+    put:
+      tags:
+        - contract
+      summary: Atualiza as informações do contrato
+      operationId: updateContract
+      parameters:
+        - name: id
+          description: id do contrato recebido no post
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Dados do contrato no corpo da requisição
+        content:
+          application/json:
+            schema:
+              $ref: contract.json
+        required: true
+      responses:
+        200:
+          description: contrato atualizado
+        405:
+          description: Invalid input
+
+  /{id}/hup:
+    put:
+      tags:
+        - contract
+      summary: Avança o contrato para a próxima fase
+      operationId: hupContract
+      parameters:
+        - name: id
+          description: id do contrato recebido no post
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Dados do contrato no corpo da requisição
+        content:
+          application/json:
+            schema:
+              $ref: approval.json
+        required: true
+      responses:
+        200:
+          description: Contrato avançou para próxima fase
+        405:
+          description: Invalid input
+          content: {}
+
+  /{id}/photos/{name}:
+    get:
+      tags:
+        - contract
+        - images
+      summary: |
+        Requisita informação para upload de uma imagem
+        O retorno serão informações para fazer upload diretamente
+        no AWS S3.
+      operationId: uploadImage
+      parameters:
+        - name: id
+          description: id do contrato recebido no post
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          description: nome da foto que será atualizada
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - identity
+              - income
+              - assetPic1
+              - assetPic2
+              - assetPic3
+              - assetPic4
+              - assetPic5
+              - assetPic6
+      responses:
+        200:
+          description: Contrato foi aprovado/reprovado com sucesso
+        405:
+          description: Invalid input
+          content: {}
+      security:
+        - api_key: []
+
+  /{id}/approval:
+    post:
+      tags:
+        - contract
+      summary: Aprova/Desaprova o pedido de emprestimo
+      operationId: approveContract
+      parameters:
+        - name: id
+          description: id do contrato recebido no post
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Contrato foi aprovado/reprovado com sucesso
+        405:
+          description: Invalid input
+          content: {}
+      security:
+        - api_key: []
+
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

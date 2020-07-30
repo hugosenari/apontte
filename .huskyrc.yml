@@ -1,0 +1,4 @@
+hooks:
+  pre-push: "npm test"
+  post-checkout: "npm install"
+  post-merge: "npm install"

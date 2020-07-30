@@ -1,0 +1,54 @@
+create:
+  handler: src/create.handler
+  name: ${self:provider.stage}-${self:service}-contract-create
+  events:
+    - http:
+        path: /
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(swagger/contract.json)}
+
+update:
+  handler: src/update.handler
+  name: ${self:provider.stage}-${self:service}-contract-update
+  events:
+    - http:
+        path: /{id}
+        method: put
+        cors: true
+        request:
+          schema:
+            application/json: ${file(swagger/contract.json)}
+
+approve:
+  handler: src/approve.handler
+  name: ${self:provider.stage}-${self:service}-contract-approve
+  events:
+    - http:
+        path: /{id}/approval
+        method: post
+        cors: true
+        private: true
+        request:
+          schema:
+            application/json: ${file(swagger/approval.json)}
+
+hup:
+  handler: src/hup.handler
+  name: ${self:provider.stage}-${self:service}-contract-hup
+  events:
+    - http:
+        path: /{id}/hup
+        method: put
+        cors: true
+
+grantPhotoUpload:
+  handler: src/grantPhotoUpload.handler
+  name: ${self:provider.stage}-${self:service}-applicant-photo
+  events:
+    - http:
+        path: /{id}/photos/{name}
+        method: get
+        cors: true

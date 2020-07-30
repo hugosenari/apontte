@@ -1,0 +1,81 @@
+{
+  "title": "Contract",
+  "type": "object",
+  "properties": {
+    "fullName": {
+      "description": "Nome completo do contratador",
+      "type": "string",
+      "pattern": "^[a-zA-Z]+.+$"
+    },
+    "email": {
+      "description": "E-mail do contratador",
+      "type": "string",
+      "pattern": "^.+@.+$"
+    },
+    "cpf": {
+      "description": "CPF do contratador",
+      "type": "string",
+      "pattern": "^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$"
+    },
+    "requestedValue": {
+      "description": "Valor a ser contratado em reais, deve ser maior que 30000",
+      "type": "integer",
+      "minimum": 30000
+    },
+    "monthlyIncome": {
+      "description": "Atual salário mensal do contratador, em reais",
+      "type": "integer",
+      "minimum": 1
+    },
+    "birthDate": {
+      "description": "Data de nascimento do contratador",
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2020
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        }
+      }
+    },
+    "civilStatus": {
+      "description": "Estado civil do contratador",
+      "type": "string",
+      "enum": ["solteiro", "casado", "separado", "divorciado", "viúvo"]
+    },
+    "address": {
+      "description": "Endereço em que contratador reside",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Estado",
+          "type": "string"
+        },
+        "city": {
+          "description": "Cidade",
+          "type": "string"
+        },
+        "zipcode": {
+          "description": "CEP",
+          "type": "string"
+        },
+        "address": {
+          "description": "Demais informações de endereço como Rua, numero, apartamento, bairro",
+          "type": "string"
+        }
+      },
+      "required": ["state", "city", "zipcode", "address"]
+    }
+  },
+  "required": ["name", "email", "cpf", "requestedValue"]
+}

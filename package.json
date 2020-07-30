@@ -1,0 +1,21 @@
+{
+  "name": "apontte",
+  "version": "1.0.0",
+  "description": "Pontte Coding Challenge",
+  "main": " ",
+  "scripts": {
+    "test": "jest; openapi lint swagger/swagger.yml"
+  },
+  "keywords": ["serverless"],
+  "author": "hugosenari",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "serverless": "^1.77.1"
+  },
+  "dependencies": {
+    "@redocly/openapi-cli": "^1.0.0-beta.7"
+  }
+}
