@@ -1,8 +1,0 @@
-name: aws
-stage: ${opt:stage, 'dev'}
-region: ${opt:region, 'us-east=1'}
-apiName: ${opt:apiName, 'apontte-api'}
-memorySize: ${opt:memorySize, 128}
-endpointType: regional
-apiKeys:
-  - ${opt:apiKey, 'The0Quick1Brown2Fox3Jumps4-Over5A6Lazy7Dog8'}

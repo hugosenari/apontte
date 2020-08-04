@@ -1,0 +1,12 @@
+iamRoleStatements:
+  Effect: Allow
+  Action:
+    - s3:GetObject
+    - s3:ListBucket
+    - s3:PutObject
+  Resource: arn:aws:s3:::${self:service}ContractPics${self:provider.stage}
+
+resource:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: ${self:service}ContractPics${self:provider.stage}

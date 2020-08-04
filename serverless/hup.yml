@@ -1,0 +1,8 @@
+event:
+  handler: src/hup.handler
+  name: ${self:provider.stage}-${self:service}-contract-hup
+  events:
+    - http:
+        path: /{id}/hup
+        method: put
+        cors: true

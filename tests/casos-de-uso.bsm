@@ -1,0 +1,82 @@
+Pedido Inexistente (000):
+  Update (000)
+  (error 404)
+
+  Grant (000)
+  (error 404)
+
+  Hup (000)
+  (error 404)
+
+  Aprove (000)
+  (error 404)
+
+  Create (000)
+  Dados Requeridos?
+  Não
+  (error 400)
+
+  ...
+  Dados Requeridos?
+  Sim
+  Pedido Existente (001): (201-001)
+
+Pedido Existente (001):
+  Grant (001)
+  (error 400-001)
+
+  Approve (001)
+  (error 400-001)
+
+  Update (001)
+  (200-001)
+
+  Hup (001)
+  Upload Imagens (002): (200-002)
+
+Upload Imagens (002):
+  Grant (002)
+  (200-002)
+
+  Update (002)
+  (200-002)
+
+  Hup (002)
+  Possui Imagem Identidade?
+  Sim
+  Aprovação (003):(200-003)
+
+  ...
+  Possui Imagem Identidade?
+  Não
+  (error 400-002)
+
+  Approve (002)
+  (error 400-002)
+
+Aprovação (003):
+  Update (003)
+  (200-003)
+
+  Grant (003)
+  (200-003)
+
+  Hup (003)
+  (error 400-003)
+
+  Approve (003)
+  Finalizado (004): (terminate 200-004)
+
+Finalizado (004):
+  Update (004)
+  (error 400-004)
+
+  Grant (004)
+  (error 400-004)
+
+  Hup (004)
+  (error 400-004)
+
+  Approve (004)
+  (error 400-004)
+

@@ -1,0 +1,26 @@
+version: "2.0"
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000"
+    command: -jar DynamoDBLocal.jar -sharedDb
+  contractTable:
+    depends_on:
+      - dynamodb
+    image: mesosphere/aws-cli
+    environment:
+      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      - AWS_DEFAULT_REGION=local
+    command: dynamodb create-table --table-name apontte-contract-local --attribute-definitions AttributeName=id,AttributeType=S --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --key-schema AttributeName=id,KeyType=HASH --endpoint-url http://dynamodb:8000 --region local
+  s3:
+    image: minio/minio
+    volumes:
+      - ./tests/s3/:/data
+    command: server /data
+    ports:
+      - "9000:9000"
+    environment:
+      - MINIO_SECRET_KEY=secret_key
+      - MINIO_ACCESS_KEY=access_key

@@ -1,0 +1,23 @@
+iamRoleStatements:
+  Effect: Allow
+  Action:
+    - dynamodb:Query
+    - dynamodb:Scan
+    - dynamodb:GetItem
+    - dynamodb:PutItem
+  Resource:
+    Ref: ApontteContractsTable
+
+resource:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: ${self:service}Contract${self:provider.stage}
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    ProvisionedThroughput:
+      ReadCapacityUnits: 3
+      WriteCapacityUnits: 3

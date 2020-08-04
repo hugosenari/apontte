@@ -1,0 +1,8 @@
+event:
+  handler: src/grantPhotoUpload.handler
+  name: ${self:provider.stage}-${self:service}-contract-photo
+  events:
+    - http:
+        path: /{id}/photos/{type}
+        method: get
+        cors: true

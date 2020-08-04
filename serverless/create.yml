@@ -1,0 +1,11 @@
+event:
+  handler: src/create.handler
+  name: ${self:provider.stage}-${self:service}-contract-create
+  events:
+    - http:
+        path: /
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(swagger/contract.json)}

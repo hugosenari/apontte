@@ -1,9 +1,37 @@
 service: apontte
 
-provider: serverless/provider.yml
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  apiName: ${opt:apiName, 'apontte-api'}
+  memorySize: ${opt:memorySize, 128}
+  endpointType: regional
+  apiKeys:
+    - ${opt:apiKey, 'The0Quick1Brown2Fox3Jumps4-Over5A6Lazy7Dog8'}
+  iamRoleStatements:
+    - ${file(./serverless/dynamodb.yml):iamRoleStatements}
+    - ${file(./serverless/s3bucket.yml):iamRoleStatements}
+  environment:
+    DDB_URL: ${opt:ddbUrl, ''}
+    S3_URL: ${opt:s3Url, ''}
+    S3_ACCESS_KEY: ${opt:s3AccessKey, ''}
+    S3_SECRET_KEY: ${opt:s3SecretKey, ''}
+    CONTRACT_TABLE: ${self:service}-contract-${self:provider.stage}
+    CONTRACT_BUCKET: ${self:service}-contract-${self:provider.stage}
+    RND_KEY: ${file(./node_modules/uuid/dist/v1.js):default}
 
-fuctions: serverless/functions.yml
+functions:
+  hup: ${file(./serverless/hup.yml):event}
+  create: ${file(./serverless/create.yml):event}
+  update: ${file(./serverless/update.yml):event}
+  approve: ${file(./serverless/approve.yml):event}
+  grantPhotoUpload: ${file(./serverless/grantPhotoUpload.yml):event}
 
-resources: serverless/resources.yml
+resources:
+  Resources:
+    ApontteContractsTable: ${file(./serverless/dynamodb.yml):resource}
+    ApontteContractPics: ${file(./serverless/s3bucket.yml):resource}
 
-plugins: serverless/plugins.yml
+plugins:
+  - serverless-offline

@@ -1,0 +1,12 @@
+event:
+  handler: src/approve.handler
+  name: ${self:provider.stage}-${self:service}-contract-approve
+  events:
+    - http:
+        path: /{id}/approval
+        method: post
+        cors: true
+        private: true
+        request:
+          schema:
+            application/json: ${file(swagger/approval.json)}

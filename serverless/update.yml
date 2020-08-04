@@ -1,0 +1,11 @@
+event:
+  handler: src/update.handler
+  name: ${self:provider.stage}-${self:service}-contract-update
+  events:
+    - http:
+        path: /{id}
+        method: put
+        cors: true
+        request:
+          schema:
+            application/json: ${file(swagger/contract.json)}

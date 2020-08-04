@@ -33,8 +33,7 @@
       "properties": {
         "year": {
           "type": "integer",
-          "minimum": 1900,
-          "maximum": 2020
+          "minimum": 1900
         },
         "month": {
           "type": "integer",
