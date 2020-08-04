@@ -10,7 +10,8 @@
     "test": "npm run test:unit; npm run test:docs",
     "test:unit": "jest --coverage src",
     "test:acceptance": "jest tests/acceptance.spec.js",
-    "test:docs": "openapi lint swagger/swagger.yml"
+    "test:docs": "openapi lint swagger/swagger.yml",
+    "deploy": "sls deploy"
   },
   "keywords": ["serverless"],
   "author": "hugosenari",

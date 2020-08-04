@@ -1,6 +1,16 @@
 # Apontte
 
-API para registro de novos contratos de crédito da Pontte
+API para registro de novos contratos de crédito da Pontte.
+
+## Endpoints:
+
+- Create: cria um registro novo;
+- Update: atualiza o registro;
+- Hup: passa o registro para o próximo estágio;
+- Grant: monta a url para upload das imagens no s3;
+- Approve: aprova/desaprova o pedido.
+
+Para mais informações sobre os endpoints, consultar [swagger](./swagger/swagger.yml).
 
 # Testes Integrados
 
@@ -34,3 +44,8 @@ npm run test:acceptance
 ```sh
 npm run deploy
 ```
+
+# TODO
+
+- Melhorar testes unitários
+- Melhorar testes Integrados
