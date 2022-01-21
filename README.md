@@ -1,6 +1,6 @@
 # Apontte
 
-API para registro de novos contratos de crédito da Pontte.
+API para registro de novos contratos de crédito.
 
 ## Endpoints:
 
